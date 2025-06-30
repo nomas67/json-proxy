@@ -1,0 +1,19 @@
+<?php
+// رابط ملف JSON من Codeberg
+$url = "https://codeberg.org/Mark_Eshia/arab/raw/branch/builds/repo.json";
+
+// السماح بالوصول من أي دومين (CORS)
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+
+// جلب البيانات
+$response = file_get_contents($url);
+
+if ($response === FALSE) {
+    http_response_code(500);
+    echo json_encode(["error" => "فشل تحميل البيانات من المصدر"]);
+    exit;
+}
+
+// طباعة البيانات
+echo $response;
